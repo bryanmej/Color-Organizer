@@ -1,19 +1,20 @@
 import React from "react";
 import Color from "./Color";
+import "../styles/ColorListStyles.css";
 
-const ColorList = (
+const ColorList = ({
   colors = [],
   rateColor = (f) => f,
-  removeColor = (f) => f
-) => {
+  removeColor = (f) => f,
+}) => {
   return (
-    <div>
+    <div className="colors-container">
       {colors.map((color) => (
         <Color
           {...color}
-          key={color.id}
+          key={color.title}
           rateColor={rateColor}
-          removeColor={removeColor}
+          removeColor={() => removeColor(color.title)}
         />
       ))}
     </div>

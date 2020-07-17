@@ -18,6 +18,7 @@ const ColorForm = ({ addNewColor = (f) => f }) => {
         ref={(input) => (_title = input)}
       />
       <input type="color" ref={(input) => (_color = input)} />
+      <button>add</button>
     </form>
   );
 };

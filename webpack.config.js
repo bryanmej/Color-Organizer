@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.join(__dirname, "dist", "assets"),
+    path: path.join(__dirname, "dist"),
     filename: "bundle.js",
   },
   module: {
@@ -23,5 +23,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  devServer: {
+    contentBase: "./dist",
+    compress: true,
+    port: 9000,
   },
 };

@@ -12,9 +12,9 @@ const ColorList = ({
       {colors.map((color) => (
         <Color
           {...color}
-          key={color.title}
-          rateColor={rateColor}
-          removeColor={() => removeColor(color.title)}
+          key={color.id}
+          rateColor={(rating) => rateColor(color.id, rating)}
+          removeColor={() => removeColor(color.id)}
         />
       ))}
     </div>

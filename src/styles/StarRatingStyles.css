@@ -1,0 +1,9 @@
+.rating-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.star-container {
+  margin-top: 1em;
+}

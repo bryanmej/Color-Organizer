@@ -11,6 +11,17 @@ class App extends React.Component {
     };
     this.addNewColor = this.addNewColor.bind(this);
     this.removeColor = this.removeColor.bind(this);
+    this.rateColor = this.rateColor.bind(this);
+  }
+
+  uuidGenerator() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
+      c
+    ) {
+      var r = (Math.random() * 16) | 0,
+        v = c == "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 
   addNewColor(title, color) {
@@ -18,6 +29,7 @@ class App extends React.Component {
       colors: [
         ...this.state.colors,
         {
+          id: this.uuidGenerator(),
           title,
           color,
           rating: 0,
@@ -26,19 +38,31 @@ class App extends React.Component {
     });
   }
 
-  removeColor(title) {
-    const updateList = this.state.colors.filter(
-      (color) => color.title !== title
-    );
+  rateColor(id, rating) {
+    const updateRate = this.state.colors.map((color) => {
+      return color.id !== id ? color : { ...color, rating };
+    });
+    this.setState({
+      colors: updateRate,
+    });
+  }
+
+  removeColor(id) {
+    const updateList = this.state.colors.filter((color) => color.id !== id);
     this.setState({ colors: updateList });
   }
 
   render() {
+    const { addNewColor, rateColor, removeColor } = this;
     return (
-      <div>
-        <ColorForm addNewColor={this.addNewColor} />
-        <ColorList colors={this.state.colors} removeColor={this.removeColor} />
-      </div>
+      <>
+        <ColorForm addNewColor={addNewColor} />
+        <ColorList
+          colors={this.state.colors}
+          removeColor={removeColor}
+          rateColor={rateColor}
+        />
+      </>
     );
   }
 }
